@@ -26,7 +26,7 @@ map<TokenType, string> identifierMap = {
 };
 
 // Main parsing function
-void parse(vector<Token*> tokens){
+Node* parse(vector<Token*> tokens){
     cout << "Parsing..." << endl;
     tokenList = tokens;
     Node *root;
@@ -38,6 +38,8 @@ void parse(vector<Token*> tokens){
 
     tokenIndex = 0;
     printPreorder(root, 0);
+
+    return root;
 }
 
 // gets net lookahead

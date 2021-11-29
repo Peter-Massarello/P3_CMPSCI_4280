@@ -3,7 +3,7 @@
 
 #include "scanner.hpp"
 
-void parse(vector<Token*> tokens);
+Node* parse(vector<Token*> tokens);
 Node* Program();
 Node* Block();
 Node* Vars();
