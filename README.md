@@ -1,17 +1,17 @@
-# Project 2
+# Project 3
 
  - Name:        Peter Massarello
- - Date:        November 12th 2021
+ - Date:        December 1st 2021
  - Class:       CMPSCI 4280
  - Professor:   Mark Hauschild
- - Assignment:  P2 (written in C++)
+ - Assignment:  P3 (written in C++)
 
 # How to build:
     - Run make file to compile all files (command: make)
 
 # How to run:
 
-    - ./frontEnd [filename] 
+    - ./statSem [filename] 
         - Invoked with a given file and it will parse the file then print out the parse tree
 
 # How to cleanup:

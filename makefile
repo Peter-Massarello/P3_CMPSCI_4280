@@ -2,11 +2,11 @@ CC = gcc
 
 CFLAGS = -g -std=c++11 -lstdc++
  
-all: frontEnd
+all: statSem
 
-frontEnd: main.cpp token.hpp scanner.hpp scanner.cpp parser.hpp parser.cpp semantics.hpp semantics.cpp
+statSem: main.cpp token.hpp scanner.hpp scanner.cpp parser.hpp parser.cpp semantics.hpp semantics.cpp
 	$(CC) -o $@ $^ $(CFLAGS) 
  
 clean:
-	rm frontEnd 
+	rm statSem 
 	rm -r *.dSYM

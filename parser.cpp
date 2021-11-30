@@ -27,7 +27,6 @@ map<TokenType, string> identifierMap = {
 
 // Main parsing function
 Node* parse(vector<Token*> tokens){
-    cout << "Parsing..." << endl;
     tokenList = tokens;
     Node *root;
 
@@ -37,7 +36,7 @@ Node* parse(vector<Token*> tokens){
     root = Program();
 
     tokenIndex = 0;
-    printPreorder(root, 0);
+    //printPreorder(root, 0);
 
     return root;
 }

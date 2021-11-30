@@ -6,91 +6,93 @@ int globalOffset = 0;
 bool inGlobal = true;
 
 void staticSemantics(Node* &tree) {
-    cout << "in static semantics" << endl;
     int level = 0;
+
+    cout << "Checking static semantics..." << endl;
+
     buildStack(tree, level);
 
-    cout << globalOffset << endl;
+    clearStack();
+
+    cout << "Program clear!" << endl;
+}
+
+void clearStack() {
+    for (int i = stack.size(); i > 0; i--) {
+        pop();
+    }
 }
 
 void checkLocalForDuplicates(string variableString) {
     for (int i = stack.size(); i > globalOffset; i--){
         if (stack.at(i-1) == variableString)
-            doubleDeclarationError();
+            doubleDeclarationError(variableString);
     }
 }
 
 void checkGlobalForDuplicates(string variableString) {
     if (find(stack.begin(), stack.end(), variableString) != stack.end())
-        doubleDeclarationError();
+        doubleDeclarationError(variableString);
     else return;
 }
 
-void checkVariableDeclaration(string variable) {
-    cout << "checking " << variable << endl;
-    bool foundDec = false;
+int find(string token) {
     for (int i = stack.size(); i > 0; i--){
-        if (stack.at(i-1) == variable) {
-            cout << "found delcaration of " << variable << endl;
-            foundDec = true;
-            return;
-        } else 
-            foundDec = false;
+        if (stack.at(i-1) == token) {
+            return (stack.size()) - i;
+        }
     }
-
-    if (!foundDec) missingDeclarationError(variable);
+    return -1;
 }
 
 void addIdToStack(Node* &tree, int level){
+    string tk1 = tree->tk1->token;
+    string tk2 = tree->tk2->token;
+    string tk3 = tree->tk3->token;
+
     if (tree->tk1->tokenType == IDtk){
         if (tree->nodeType == "<VARS>"){
             if (inGlobal) {
-                cout << "global offset increased" << endl;
                 globalOffset++;
-                checkGlobalForDuplicates(tree->tk1->token);
-                cout << "found " << tree->tk1->token << endl;
-                stack.push_back(tree->tk1->token);
+                checkGlobalForDuplicates(tk1);
+                push(tk1);
             } else {
-                cout << "found " << tree->tk1->token << endl;
-                checkLocalForDuplicates(tree->tk1->token);
-                stack.push_back(tree->tk1->token);
+                checkLocalForDuplicates(tk1);
+                push(tk1);
             }
         } else {
-            checkVariableDeclaration(tree->tk1->token);
+            int stackCheck = find(tk1);
+            if (stackCheck == -1) missingDeclarationError(tk1);
         }
     }
     if (tree->tk2->tokenType == IDtk){
         if (tree->nodeType == "<VARS>"){
             if (inGlobal) {
-                    cout << "global offset increased" << endl;
                     globalOffset++;
-                    checkGlobalForDuplicates(tree->tk2->token);
-                    cout << "found " << tree->tk1->token << endl;
-                    stack.push_back(tree->tk2->token);
+                    checkGlobalForDuplicates(tk2);
+                    push(tk2);
                 } else {
-                    cout << "found " << tree->tk2->token << endl;
-                    checkLocalForDuplicates(tree->tk2->token);
-                    stack.push_back(tree->tk2->token);
+                    checkLocalForDuplicates(tk2);
+                    push(tk2);
                 }
         } else {
-            checkVariableDeclaration(tree->tk1->token);
+            int stackCheck = find(tk2);
+            if (stackCheck == -1) missingDeclarationError(tk2);
         }
     }
-    if (tree->tk2->tokenType == IDtk && tree->nodeType == "<VARS>"){
+    if (tree->tk3->tokenType == IDtk && tree->nodeType == "<VARS>"){
         if (tree->nodeType == "<VARS>"){
             if (inGlobal) {
-                    cout << "global offset increased" << endl;
                     globalOffset++;
-                    checkGlobalForDuplicates(tree->tk3->token);
-                    cout << "found " << tree->tk1->token << endl;
-                    stack.push_back(tree->tk3->token);
+                    checkGlobalForDuplicates(tk3);
+                    push(tk3);
                 } else {
-                    cout << "found " << tree->tk3->token << endl;
-                    checkLocalForDuplicates(tree->tk3->token);
-                    stack.push_back(tree->tk3->token);
+                    checkLocalForDuplicates(tk3);
+                    push(tk3);
                 }
         } else {
-            checkVariableDeclaration(tree->tk1->token);
+            int stackCheck = find(tk3);
+            if (stackCheck == -1) missingDeclarationError(tk3);
         }
     }
 }
@@ -107,7 +109,6 @@ void buildStack(Node* &tree, int level) {
     if (tree->nodeType == "<BLOCK>") {
         //clearLocalStack();
         inGlobal = false;
-        cout << "out of global" << endl;
     }
 
     addIdToStack(tree, level);
@@ -129,15 +130,20 @@ void buildStack(Node* &tree, int level) {
 
 }
 
-void doubleDeclarationError() {
-    cout << "double declaration" << endl;
+void pop() {
+    stack.pop_back();
+}
+
+void push(string variable) {
+    stack.push_back(variable);
+}
+
+void doubleDeclarationError(string variable) {
+    cout << "STATIC SEMANTICS ERROR: Double declaration of " << variable << endl;
     exit(0);
 }
 
 void missingDeclarationError(string variable) {
-    for (int i = stack.size(); i > 0; i--){
-        cout << stack.at(i-1) << endl;
-    }
-    cout << "Missing declaration of " << variable << endl;
+    cout << "STATIC SEMANTICS ERROR: Missing declaration of " << variable << endl;
     exit(0);
 }

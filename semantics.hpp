@@ -16,13 +16,15 @@ void checkLocalForDuplicates(string variable);
 
 void checkGlobalForDuplicates(string variable);
 
-void checkVariableDeclaration(string variable);
+void doubleDeclarationError(string variable);
 
-void push();
+void missingDeclarationError(string variable);
 
 void pop();
 
-void doubleDeclarationError();
+void push(string variable);
 
-void missingDeclarationError(string variable);
+int find(string variable);
+
+void clearStack();
 #endif
