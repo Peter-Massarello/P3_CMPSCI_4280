@@ -3,7 +3,7 @@ declare x = 5 ;
 program
 start
    declare y = 7 ;
-   label dog ;
+   declare dog = 0;
    listen x ;
    jump dog ;
 stop

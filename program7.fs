@@ -4,13 +4,14 @@ program
 start
    start
    declare y = 7 ;
-   label dog ;
+   declare x = 8 ;
+   label x ;
    listen x ;
    stop
    start
       start
-         declare cat = 0 ;
-         jump dog ;
+         declare y = 0 ;
+         jump y ;
       stop
    stop
 stop
