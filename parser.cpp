@@ -309,7 +309,7 @@ Node* If(){
         return NULL;
     }
 
-    return NULL;
+    return child;
 }
 
 // while [ <expr> <RO> <expr>] <stat>

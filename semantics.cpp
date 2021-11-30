@@ -105,7 +105,7 @@ void buildStack(Node* &tree, int level) {
     if (tree == NULL) return;
 
     if (tree->nodeType == "<BLOCK>") {
-        clearLocalStack();
+        //clearLocalStack();
         inGlobal = false;
         cout << "out of global" << endl;
     }

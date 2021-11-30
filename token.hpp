@@ -1,6 +1,4 @@
-
-   
-/*
+ /*
 Name: Peter Massarello
 Instructor: Mark Hauschild
 Assignment: P1
