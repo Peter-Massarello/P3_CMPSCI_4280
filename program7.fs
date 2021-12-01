@@ -1,17 +1,17 @@
 && p2g4 : fun with blocks &&
-declare x = 5 ;
 program
 start
    start
-   declare y = 7 ;
-   declare x = 8 ;
-   label x ;
-   listen x ;
+      declare b = 7 ;
+      declare x = 8 ;
+      label x ;
+      listen b ;
    stop
    start
       start
-         declare y = 0 ;
-         jump y ;
+         declare x = 0 ;
+         declare a = 2;
+         jump a ;
       stop
    stop
 stop

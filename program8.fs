@@ -2,8 +2,10 @@
 declare y = 5 ;
 program
 start
-   if [ x { == } 0 ] then
    start
-      listen z ;
-   stop ;
+      declare z = 0 ;
+      start
+      declare z = 2;
+      stop
+   stop
 stop

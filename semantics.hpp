@@ -20,6 +20,8 @@ void doubleDeclarationError(string variable);
 
 void missingDeclarationError(string variable);
 
+void addBlockToStack(Node* &tree);
+
 void pop();
 
 void push(string variable);
