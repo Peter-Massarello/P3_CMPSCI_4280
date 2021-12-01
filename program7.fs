@@ -1,4 +1,7 @@
 && p2g4 : fun with blocks &&
+declare b = 7;
+declare a = 1;
+declare y = 2;
 program
 start
    start
