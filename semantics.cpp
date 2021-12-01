@@ -25,14 +25,22 @@ void clearStack() {
 }
 
 int find(string token) {
-    for (int i = stack.size()-1; i >= globalOffset + localVarsCount; i--){
-        if (stack.at(i) == token) {
-            return (stack.size()) - i;
+    if (inGlobal){
+        for (int i = stack.size()-1; i >= 0; i--){
+            if (stack.at(i) == token) {
+                return (stack.size()) - i;
+            }
         }
-    }
-    for (int i = globalOffset - 1; i >= 0; i--) {
-        if (stack.at(i) == token) {
-            return -1;
+    } else {
+        for (int i = stack.size()-1; i >= globalOffset + localVarsCount; i--){
+            if (stack.at(i) == token) {
+                return (stack.size()) - i;
+            }
+        }
+        for (int i = globalOffset - 1; i >= 0; i--) {
+            if (stack.at(i) == token) {
+                return -1;
+            }
         }
     }
     return -1;
