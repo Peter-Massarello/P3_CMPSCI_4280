@@ -7,7 +7,7 @@ start
       declare b = 7 ;
       declare x = 8 ;
       label x ;
-      listen b ;
+      listen s ;
    stop
    start
       start

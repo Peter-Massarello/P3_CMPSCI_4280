@@ -8,9 +8,11 @@
 #include <algorithm>
 using namespace std;
 
+const int NOT_FOUND = -1;
+
 void staticSemantics(Node* &tree);
 
-void buildStack(Node* &tree, int level);
+void buildStack(Node* &tree);
 
 void checkLocalForDuplicates(string variable);
 
